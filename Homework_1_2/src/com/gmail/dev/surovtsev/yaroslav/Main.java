@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Triangle triangle1 = new Triangle(2.0, 2.0, 2.0);
         Triangle triangle2 = new Triangle(5.0, 10.0, 11.0);
+        System.out.println("Triangle1 sideA: " + triangle1.getSideA());
         System.out.println(triangle1);
         System.out.println("S1: " + triangle1.getSquare());
         System.out.println(triangle2);
