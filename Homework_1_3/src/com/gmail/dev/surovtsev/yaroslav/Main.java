@@ -14,6 +14,19 @@ package com.gmail.dev.surovtsev.yaroslav;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        Network network = new Network("Kyivstar");
+        System.out.println(network);
+        Phone phone1 = new Phone("iPhone 7 Plus 256GB", "Apple", "380971111111");
+        System.out.println(phone1);
+        Phone phone2 = new Phone("Google Pixel 5 128GB", "Google", "380972222222");
+        System.out.println(phone2);
+        String phoneNumber1 = phone1.getNumber();
+        String phoneNumber2 = phone2.getNumber();
+        phone1.callTo(phoneNumber2);
+        phone1.registerInNetwork(network);
+        phone1.callTo(phoneNumber2);
+        phone2.registerInNetwork(network);
+        phone1.callTo(phoneNumber2);
+        phone2.callTo(phoneNumber1);
     }
 }
