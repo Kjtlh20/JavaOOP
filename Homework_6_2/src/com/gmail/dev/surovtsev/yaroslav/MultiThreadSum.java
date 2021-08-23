@@ -4,10 +4,17 @@ public class MultiThreadSum {
 
     public static long getArraySumMulti(int[] array) {
         long result = 0;
+
         int threadCount = Runtime.getRuntime().availableProcessors();
+        int size = array.length / threadCount;
+        if (size < 1) {
+            size = 1;
+        }
+        if (threadCount > size) {
+            threadCount = size;
+        }
         ArraySum[] tasks = new ArraySum[threadCount];
 
-        int size = array.length / threadCount;
         int startIndex = 0;
         int endIndex = size;
         for (int i = 0; i < tasks.length; i++) {
