@@ -4,11 +4,12 @@
 package com.gmail.dev.surovtsev.yaroslav;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<String> progLangList = new ArrayList<>();
+        List<String> progLangList = new ArrayList<>();
         progLangList.add("PHP");
         progLangList.add("Objective-C");
         progLangList.add("Python");
