@@ -16,12 +16,45 @@ public class TextFileReader {
         this.file = book;
     }
 
-    public File getBook() {
+    public File getFile() {
         return file;
     }
 
-    public void setBook(File book) {
-        this.file = book;
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public TreeSet<LetterStatistic> getLetterStatictics() {
+        List<Character> charList = getCharList();
+        charList = filterOnlyChar(charList);
+
+        List<LetterStatistic> letterStatisticList = new ArrayList<>();
+        for (Character letter : charList) {
+            LetterStatistic ls = getLetterStatisticFromList(letterStatisticList, letter);
+            if (ls == null) {
+                ls = new LetterStatistic(letter, 1);
+                letterStatisticList.add(ls);
+            } else {
+                ls.setCount(ls.getCount() + 1);
+            }
+        }
+
+        TreeSet<LetterStatistic> letterStatictics = new TreeSet<>(new LetterStatisticComparator());
+        for (LetterStatistic ls : letterStatisticList) {
+            letterStatictics.add(ls);
+        }
+        return letterStatictics;
+    }
+
+    private LetterStatistic getLetterStatisticFromList(List<LetterStatistic> letterStatictics, Character letter) {
+        LetterStatistic result = null;
+        for (LetterStatistic ls : letterStatictics) {
+            if (ls.getLetter().equals(letter)) {
+                result = ls;
+                break;
+            }
+        }
+        return result;
     }
 
     private List<Character> getCharList() {
@@ -54,35 +87,6 @@ public class TextFileReader {
             }
         }
         return filteredCharList;
-    }
-
-    private <K, V> K getKey(Map<K, V> map, V value) {
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
-
-    public void printLetterStatictics() {
-        List<Character> charList = getCharList();
-        charList = filterOnlyChar(charList);
-        Map<Character, Integer> letterStatictics = new HashMap<>();
-        for (Character key : charList) {
-            if (!letterStatictics.containsKey(key)) {
-                letterStatictics.put(key, 1);
-            } else {
-                Integer value = letterStatictics.get(key);
-                letterStatictics.put(key, value + 1);
-            }
-        }
-        List<Integer> valueList = new ArrayList<>(letterStatictics.values());
-        Collections.sort(valueList, Collections.reverseOrder());
-        for (Integer value : valueList) {
-            Character key = getKey(letterStatictics, value);
-            System.out.println(key + " -> " + value);
-        }
     }
 
     @Override

@@ -5,13 +5,16 @@
 package com.gmail.dev.surovtsev.yaroslav;
 
 import java.io.File;
-import java.util.Map;
+import java.util.TreeSet;
 
 public class Main {
 
     public static void main(String[] args) {
         File file = new File("books/John Ronald Reuel Tolkien.txt");
         TextFileReader tfr = new TextFileReader(file);
-        tfr.printLetterStatictics();
+        TreeSet<LetterStatistic> letterStatictics = tfr.getLetterStatictics();
+        for (LetterStatistic ls : letterStatictics) {
+            System.out.println(ls.getLetter() + " -> " + ls.getCount());
+        }
     }
 }
