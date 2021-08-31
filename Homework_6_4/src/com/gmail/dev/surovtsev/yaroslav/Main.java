@@ -21,9 +21,18 @@ public class Main {
         Thread mainThread = Thread.currentThread();
         System.out.println("Thread " + mainThread.getName() + " start");
 
-        int n = 100;
+        int n = 1_000;
         File[] files = getFilesArray(n, folderFrom);
+
+        long timeStart = System.currentTimeMillis();
+        SingleThreadCopy.copyFilesSingleThread(files, folderFrom, folderTo);
+        long timeEnd = System.currentTimeMillis();
+        System.out.println("Single: " + (timeEnd - timeStart) + " ms");
+
+        timeStart = System.currentTimeMillis();
         MultiThreadCopy.copyFilesMultiThread(files, folderFrom, folderTo);
+        timeEnd = System.currentTimeMillis();
+        System.out.println("Multi: " + (timeEnd - timeStart) + " ms");
 
         System.out.println("Thread " + mainThread.getName() + " stop");
     }

@@ -9,6 +9,7 @@ public class FilesArray implements Runnable {
     private int endIndex;
     private File folderFrom;
     private File folderTo;
+    private Thread thread;
 
     public FilesArray() {
     }
@@ -19,8 +20,8 @@ public class FilesArray implements Runnable {
         this.endIndex = endIndex;
         this.folderFrom = folderFrom;
         this.folderTo = folderTo;
-        Thread thread = new Thread(this);
-        thread.start();
+        this.thread = new Thread(this);
+        this.thread.start();
     }
 
     public File[] getFiles() {
@@ -47,6 +48,14 @@ public class FilesArray implements Runnable {
         this.endIndex = endIndex;
     }
 
+    public Thread getThread() {
+        return thread;
+    }
+
+    public void setThread(Thread thread) {
+        this.thread = thread;
+    }
+
     @Override
     public void run() {
         for (int i = startIndex; i < endIndex; i++) {
@@ -55,8 +64,8 @@ public class FilesArray implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Thread thread = Thread.currentThread();
-            System.out.println(thread.getName() + "(" + thread.getId() + ") " + files[i].getName());
+            //Thread thread = Thread.currentThread();
+            //System.out.println(thread.getName() + "(" + thread.getId() + ") " + files[i].getName());
         }
     }
 
